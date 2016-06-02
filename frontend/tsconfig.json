@@ -8,7 +8,13 @@
     },
     "files": [
         "typings/index.d.ts",
-        "src/index.tsx"
+        "src/index.tsx",
+        "src/scripts/components/App.tsx",
+        "src/scripts/components/Routes.tsx",
+        "src/scripts/pages/Feed.tsx",
+        "src/scripts/pages/NotFound.tsx",
+        "src/scripts/pages/Register.tsx",
+        "src/scripts/pages/SignIn.tsx"
     ],
     "filesGlob": [
         "typings/index.d.ts",
