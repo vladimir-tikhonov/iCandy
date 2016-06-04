@@ -3,18 +3,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: "./src/index.tsx",
     output: {
-        filename: "./dist/bundle.js",
+        path: "dist",
+        filename: "bundle.js",
     },
 
     devtool: "source-map",
 
     resolve: {
-        extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
+        extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js", "html"]
     },
 
     plugins: [
         new HtmlWebpackPlugin({
-            filename: 'dist/index.html',
+            filename: 'index.html',
             template: 'src/index.template.html'
         })
     ],
