@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDom from "react-dom";
-import { createStore } from "redux";
+import { createStore, compose } from "redux";
 import { Provider } from "react-redux";
 
 import Routes from "./scripts/components/Routes";
@@ -8,11 +8,19 @@ import reducer from "./scripts/reducers/reducer";
 
 import "style!css!react-virtualized/styles.css";
 
-const store = createStore(reducer);
+interface WindowsWithReduxDevTools extends Window {
+    devToolsExtension(): () => any;
+}
+
+declare var window: WindowsWithReduxDevTools;
+
+const store = createStore(reducer, compose(
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+));
 
 const Root = () => (
     <Provider store={store}>
-        <Routes />
+        <Routes store={store} />
     </Provider>
 );
 

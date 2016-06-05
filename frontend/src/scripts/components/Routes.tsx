@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Router, Route, IndexRoute, browserHistory } from "react-router";
+import { syncHistoryWithStore } from "react-router-redux";
 
 import App from "./App";
 import Feed from "../pages/Feed";
@@ -8,9 +9,9 @@ import SignIn from "../pages/SignIn";
 
 import NotFound from "../pages/NotFound";
 
-const Routes = () => {
+const Routes = ({store}) => {
     return (
-        <Router history={browserHistory}>
+        <Router history={syncHistoryWithStore(browserHistory, store)}>
             <Route path="/" component={App}>
                 <IndexRoute component={Feed} />
                 <Route path="register" component={Register} />

@@ -23,6 +23,7 @@
     "react-addons-shallow-compare": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
+    "react-router-redux": "^4.0.4",
     "react-virtualized": "^7.3.2",
     "redux": "^3.5.2"
   },
