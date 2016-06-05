@@ -5,6 +5,7 @@ import { UserAuthWrapper } from "redux-auth-wrapper";
 import { getCurrentUser } from "../reducers/reducer";
 
 import App from "./App";
+import UnauthorizedApp from "./UnauthorizedApp";
 import Feed from "../pages/Feed";
 import Register from "../pages/Register";
 import SignIn from "../pages/SignIn";
@@ -23,9 +24,10 @@ const Routes = ({store}) => {
             <Route path="/" component={UserIsAuthenticated(App)}>
                 <IndexRoute component={Feed} />
             </Route>
-            <Route path="register" component={Register} />
-            <Route path="sign-in" component={SignIn} />
-
+            <Route path="/" component={UnauthorizedApp}>
+                <Route path="register" component={Register} />
+                <Route path="sign-in" component={SignIn} />
+            </Route>
             <Route path="*" component={NotFound}/>
         </Router>
     );
