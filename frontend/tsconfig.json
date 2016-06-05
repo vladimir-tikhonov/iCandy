@@ -8,6 +8,8 @@
     },
     "files": [
         "typings/index.d.ts",
+        "src/scripts/reducers/reducer.ts",
+        "src/scripts/reducers/session.ts",
         "src/index.tsx",
         "src/scripts/components/App.tsx",
         "src/scripts/components/Routes.tsx",
