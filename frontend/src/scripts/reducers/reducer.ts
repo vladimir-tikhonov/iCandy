@@ -7,3 +7,7 @@ export default combineReducers({
     currentUser,
     routing: routerReducer,
 });
+
+export function getCurrentUser(state) {
+    return state.currentUser;
+}
