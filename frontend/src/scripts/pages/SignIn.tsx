@@ -1,9 +1,10 @@
 import * as React from "react";
+import RaisedButton from "material-ui/RaisedButton";
 
 class SignIn extends React.Component<ReactRouter.RouteComponentProps<{}, {}>, {}> {
     public render(): JSX.Element {
         return (
-            <h2>SignIn</h2>
+            <RaisedButton label="Sign in!" />
         );
     }
 }
