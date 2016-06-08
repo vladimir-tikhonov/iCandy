@@ -14,7 +14,7 @@ import "style!css!react-virtualized/styles.css";
 injectTapEventPlugin();
 
 interface WindowsWithReduxDevTools extends Window {
-    devToolsExtension(): () => any;
+    devToolsExtension(): () => Function;
 }
 
 declare var window: WindowsWithReduxDevTools;

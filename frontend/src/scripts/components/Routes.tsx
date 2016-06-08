@@ -4,8 +4,8 @@ import { syncHistoryWithStore } from "react-router-redux";
 import { UserAuthWrapper } from "redux-auth-wrapper";
 import { getCurrentUser } from "../reducers/reducer";
 
-import App from "./App";
-import UnauthorizedApp from "./UnauthorizedApp";
+import AuthorizedWrapper from "./AuthorizedWrapper";
+import UnauthorizedWrapper from "./UnauthorizedWrapper";
 import Feed from "../pages/Feed";
 import Register from "../pages/Register";
 import SignIn from "../pages/SignIn";
@@ -21,10 +21,10 @@ const UserIsAuthenticated = UserAuthWrapper({
 const Routes = ({store}) => {
     return (
         <Router history={syncHistoryWithStore(browserHistory, store)}>
-            <Route path="/" component={UserIsAuthenticated(App)}>
+            <Route path="/" component={UserIsAuthenticated(AuthorizedWrapper)}>
                 <IndexRoute component={Feed} />
             </Route>
-            <Route path="/" component={UnauthorizedApp}>
+            <Route path="/" component={UnauthorizedWrapper}>
                 <Route path="register" component={Register} />
                 <Route path="sign-in" component={SignIn} />
             </Route>

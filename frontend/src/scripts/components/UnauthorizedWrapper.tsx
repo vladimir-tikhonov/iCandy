@@ -1,7 +1,7 @@
 import * as React from "react";
 import AppBar from "material-ui/AppBar";
 
-const UnauthorizedApp: React.StatelessComponent<ReactRouter.RouteComponentProps<{}, {}>> = (props) => {
+const UnauthorizedWrapper: React.StatelessComponent<ReactRouter.RouteComponentProps<{}, {}>> = (props) => {
     return (
         <div>
             <AppBar title="iCandy - make NakedSelfie great again" showMenuIconButton={false}/>
@@ -10,4 +10,4 @@ const UnauthorizedApp: React.StatelessComponent<ReactRouter.RouteComponentProps<
     );
 };
 
-export default UnauthorizedApp;
+export default UnauthorizedWrapper;

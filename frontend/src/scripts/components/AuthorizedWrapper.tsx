@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const App: React.StatelessComponent<ReactRouter.RouteComponentProps<{}, {}>> = (props) => {
+const AuthorizedWrapper: React.StatelessComponent<ReactRouter.RouteComponentProps<{}, {}>> = (props) => {
     return (
         <div>
             <h1>Application</h1>
@@ -9,4 +9,4 @@ const App: React.StatelessComponent<ReactRouter.RouteComponentProps<{}, {}>> = (
     );
 };
 
-export default App;
+export default AuthorizedWrapper;
