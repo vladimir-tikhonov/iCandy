@@ -2,4 +2,5 @@
 
 cd $TRAVIS_BUILD_DIR/frontend
 npm run build
-npm run lint
+npm run tslint
+npm run sass-lint

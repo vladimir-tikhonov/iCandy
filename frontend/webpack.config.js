@@ -1,4 +1,4 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     entry: "./src/index.tsx",
@@ -15,15 +15,24 @@ module.exports = {
 
     plugins: [
         new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: 'src/index.template.html'
+            filename: "index.html",
+            template: "src/index.template.html"
         })
     ],
 
     module: {
-        loaders: [{
-            test: /\.tsx?$/,
-            loader: "ts-loader"
+        loaders: [
+            {
+                test: /\.tsx?$/,
+                loader: "ts-loader"
+            },
+            {
+                test: /\.scss$/,
+                loaders: [
+                    "style?sourceMap",
+                    "css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]",
+                    "sass?sourceMap"
+                ]
         }],
 
         preLoaders: [{
@@ -33,9 +42,9 @@ module.exports = {
     },
 
     devServer: {
-        host: '0.0.0.0',
+        host: "0.0.0.0",
         port: 3000,
-        contentBase: './dist',
+        contentBase: "./dist",
         historyApiFallback: true
     }
 };
