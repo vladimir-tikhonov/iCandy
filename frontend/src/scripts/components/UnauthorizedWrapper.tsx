@@ -2,7 +2,7 @@ import * as React from "react";
 import AppBar from "material-ui/AppBar";
 import * as CSSModules from "react-css-modules";
 
-const styles = require("../../styles/components/UnauthorizedWrapper.scss");
+const styles = require("styles/components/UnauthorizedWrapper.scss");
 
 interface IUnauthorizedWrapper extends React.StatelessComponent<ReactRouter.RouteComponentProps<{}, {}>> {};
 

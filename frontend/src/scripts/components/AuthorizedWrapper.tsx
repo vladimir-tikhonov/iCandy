@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as CSSModules from "react-css-modules";
 
-const styles = require("../../styles/components/AuthorizedWrapper.scss");
+const styles = require("styles/components/AuthorizedWrapper.scss");
 
 interface IAuthorizedWrapper extends React.StatelessComponent<ReactRouter.RouteComponentProps<{}, {}>> {};
 
