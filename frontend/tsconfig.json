@@ -25,6 +25,9 @@
         "src/**/*.tsx",
         "!node_modules/**"
     ],
+    "exclude": [
+        "node_modules"
+    ],
     "atom": {
         "rewriteTsconfig": true
     },
