@@ -2,6 +2,7 @@ import * as React from "react";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
 import * as CSSModules from "react-css-modules";
+import { Link } from "react-router";
 
 const styles = require("styles/pages/SignIn.scss");
 
@@ -11,10 +12,13 @@ class SignIn extends React.Component<ReactRouter.RouteComponentProps<{}, {}>, {}
         return (
             <div styleName="sign-in-form-wrapper">
                 <TextField hintText="Username or email"/>
-                <br />
                 <TextField hintText="Password"/>
-                <br />
                 <RaisedButton primary label="Sign in" />
+
+                <div styleName="links">
+                    <Link to="/register" styleName="link">Don't have an account?</Link>
+                    <Link to="/register" styleName="link">Forgot your password?</Link>
+                </div>
             </div>
         );
     }
