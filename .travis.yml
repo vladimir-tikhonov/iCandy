@@ -4,3 +4,7 @@ node_js:
 
 install: ./ci/install-dependencies.sh
 script: ./ci/build.sh
+
+cache:
+  directories:
+    - frontend/node_modules
