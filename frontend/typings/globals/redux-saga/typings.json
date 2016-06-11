@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/56295f5058cac7ae458540423c50ac2dcf9fc711/redux-saga/redux-saga.d.ts",
+    "raw": "registry:dt/redux-saga#0.9.1+20160316155526",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/56295f5058cac7ae458540423c50ac2dcf9fc711/redux-saga/redux-saga.d.ts"
+  }
+}
