@@ -2,6 +2,10 @@
     composes: auth-form-wrapper from 'styles/base/pages/AuthPage.scss';
 }
 
+.submit-button {
+    composes: submit-button from 'styles/base/pages/AuthPage.scss';
+}
+
 .links {
     composes: links from 'styles/base/pages/AuthPage.scss';
 }

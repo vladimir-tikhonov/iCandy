@@ -8,6 +8,7 @@
     "react-router-redux": "registry:dt/react-router-redux#4.0.0+20160316155526",
     "react-router/history": "registry:dt/react-router/history#2.0.0+20160316155526",
     "react-tap-event-plugin": "registry:dt/react-tap-event-plugin#0.0.0+20160602142434",
-    "redux": "registry:dt/redux#3.3.1+20160326112656"
+    "redux": "registry:dt/redux#3.3.1+20160326112656",
+    "redux-saga": "registry:dt/redux-saga#0.9.1+20160316155526"
   }
 }

@@ -13,7 +13,7 @@ class SignIn extends React.Component<ReactRouter.RouteComponentProps<{}, {}>, {}
             <div styleName="sign-in-form-wrapper">
                 <TextField hintText="Username or email"/>
                 <TextField hintText="Password"/>
-                <RaisedButton primary label="Sign in" />
+                <RaisedButton primary label="Sign in" className={styles["submit-button"]} />
 
                 <div styleName="links">
                     <Link to="/register" styleName="link">Don't have an account?</Link>
