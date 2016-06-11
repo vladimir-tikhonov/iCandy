@@ -7,7 +7,7 @@ interface IAuthorizedWrapper extends React.StatelessComponent<ReactRouter.RouteC
 
 const AuthorizedWrapper: IAuthorizedWrapper = (props) => {
     return (
-        <div styleName="wrapper">
+        <div>
             <h1>Application</h1>
             {props.children}
         </div>

@@ -1,0 +1,3 @@
+.sign-in-form-wrapper {
+    composes: auth-form-wrapper from "../base/pages/AuthPage.scss";
+}

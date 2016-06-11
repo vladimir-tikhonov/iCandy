@@ -3,8 +3,9 @@
         "sourceMap": true,
         "pretty": true,
         "module": "commonjs",
-        "target": "ES6",
-        "jsx": "React"
+        "target": "ES5",
+        "jsx": "React",
+        "experimentalDecorators": true
     },
     "files": [
         "typings/index.d.ts",

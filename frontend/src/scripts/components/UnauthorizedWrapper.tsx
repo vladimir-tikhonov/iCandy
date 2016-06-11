@@ -8,9 +8,11 @@ interface IUnauthorizedWrapper extends React.StatelessComponent<ReactRouter.Rout
 
 const UnauthorizedWrapper: IUnauthorizedWrapper = (props) => {
     return (
-        <div styleName="wrapper">
+        <div>
             <AppBar title="iCandy - make NakedSelfie great again" showMenuIconButton={false}/>
-            {props.children}
+            <div styleName="content-wrapper">
+                {props.children}
+            </div>
         </div>
     );
 };
