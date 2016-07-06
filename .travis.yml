@@ -1,10 +1,12 @@
-language: node_js
-node_js:
-  - 6
+sudo: required
 
-install: ./ci/install-dependencies.sh
-script: ./ci/build.sh
+services:
+  - docker
 
-cache:
-  directories:
-    - frontend/node_modules
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
+  - make setup-dev
+
+script:
+  - make build-ci
