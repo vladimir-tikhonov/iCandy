@@ -1,8 +1,9 @@
 import * as React from "react";
 import * as ReactDom from "react-dom";
+import "babel-polyfill";
 import { createStore, compose, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import * as injectTapEventPlugin from "react-tap-event-plugin";
+import injectTapEventPlugin from "react-tap-event-plugin";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import createSagaMiddleware from "redux-saga";
@@ -14,12 +15,6 @@ import saga from "./scripts/sagas/saga";
 import "style!css!react-virtualized/styles.css";
 
 injectTapEventPlugin();
-
-interface WindowsWithReduxDevTools extends Window {
-    devToolsExtension(): () => Function;
-}
-
-declare var window: WindowsWithReduxDevTools;
 
 const sagaMiddleware = createSagaMiddleware();
 

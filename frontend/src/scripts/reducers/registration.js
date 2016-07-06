@@ -1,10 +1,6 @@
 import { combineReducers } from "redux";
 import { REGISTRATION_REQUESTED, REGISTRATION_SUCCEEDED, REGISTRATION_FAILED } from "../actions/actions";
 
-export interface IRegistrationState {
-    isRegistrationInProgress: boolean;
-}
-
 function isRegistrationInProgress(state = false, action) {
     switch (action.type) {
     case REGISTRATION_REQUESTED:
@@ -23,6 +19,6 @@ const registration = combineReducers({
 
 export default registration;
 
-export function getIsRegistrationInProgress(state: IRegistrationState) {
+export function getIsRegistrationInProgress(state) {
     return state.isRegistrationInProgress;
 }
