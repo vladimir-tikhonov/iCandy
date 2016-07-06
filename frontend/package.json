@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.js --inline",
     "build": "webpack",
-    "eslint": "eslint src/",
+    "eslint": "eslint 'src/**/*.js?(x)'",
     "sass-lint": "sass-lint -c sass-lint.yml 'src/styles/**/*.scss'  -v -q"
   },
   "repository": {

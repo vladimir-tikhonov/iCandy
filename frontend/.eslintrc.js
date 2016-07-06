@@ -5,7 +5,7 @@ module.exports = {
         "jsx": true,
         "experimentalObjectRestSpread": true
     },
-    "extends": "eslint:recommended",
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
     "plugins": [
         "react"
     ],
@@ -177,5 +177,7 @@ module.exports = {
         "wrap-iife": [2, "any"],
         "yield-star-spacing": [2, "both"],
         "yoda": [2, "never"],
+
+        "react/prop-types": 0
     }
 };

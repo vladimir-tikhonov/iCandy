@@ -6,20 +6,20 @@ import CSSModules from "react-css-modules";
 import {Link} from "react-router";
 import {connect} from "react-redux";
 
-import {registrationRequest, IRequestRegistrationParams} from "../actions/registration";
+import {registrationRequest} from "../actions/registration";
 import {getIsRegistrationInProgress} from "../reducers/registration";
-import {IApplicationState, getRegistration} from "../reducers/reducer";
+import {getRegistration} from "../reducers/reducer";
 
 const styles = require("styles/pages/Register.scss");
 
 const mapStateToProps = (state) => ({
-    isLoading: getIsRegistrationInProgress(getRegistration(state))
+    isLoading: getIsRegistrationInProgress(getRegistration(state)),
 });
 
 const mapDispatchToProps = (dispatch) => ({
     onSubmit: function(params) {
         dispatch(registrationRequest(params));
-    }
+    },
 });
 
 @CSSModules(styles)
@@ -28,7 +28,7 @@ class Register extends React.Component {
         const params = {
             username: "123",
             email: "123",
-            password: "123"
+            password: "123",
         };
         this.props.onSubmit(params);
     }
