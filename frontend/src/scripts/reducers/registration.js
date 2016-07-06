@@ -1,7 +1,9 @@
+// @flow
+
 import { combineReducers } from "redux";
 import { REGISTRATION_REQUESTED, REGISTRATION_SUCCEEDED, REGISTRATION_FAILED } from "../actions/actions";
 
-function isRegistrationInProgress(state = false, action) {
+function isRegistrationInProgress(state: bool = false, action) {
     switch (action.type) {
     case REGISTRATION_REQUESTED:
         return true;
@@ -13,12 +15,14 @@ function isRegistrationInProgress(state = false, action) {
     }
 }
 
+export type RegistrationState = {
+    isRegistrationInProgress: bool
+}
+
 const registration = combineReducers({
     isRegistrationInProgress,
 });
 
 export default registration;
 
-export function getIsRegistrationInProgress(state) {
-    return state.isRegistrationInProgress;
-}
+export const getIsRegistrationInProgress = (state: RegistrationState) => state.isRegistrationInProgress;

@@ -1,3 +1,5 @@
+// @flow
+
 import { takeEvery } from "redux-saga";
 import { put } from "redux-saga/effects";
 
@@ -17,6 +19,6 @@ function * performRegistration() {
     }
 }
 
-export default function * saga() {
+export default function * saga(): Generator<any, any, any> {
     yield * takeEvery(REGISTRATION_REQUESTED, performRegistration);
 }

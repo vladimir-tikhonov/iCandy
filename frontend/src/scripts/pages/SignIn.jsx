@@ -1,3 +1,5 @@
+// @flow
+
 import * as React from "react";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
@@ -13,7 +15,7 @@ class SignIn extends React.Component {
             <div styleName="sign-in-form-wrapper">
                 <TextField hintText="Username or email"/>
                 <TextField hintText="Password"/>
-                <RaisedButton primary label="Sign in" className={styles["submit-button"]}/>
+                <RaisedButton primary label="Sign in" styleName="submit-button"/>
 
                 <div styleName="links">
                     <Link to="/register" styleName="link">Don't have an account?</Link>

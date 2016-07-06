@@ -1,3 +1,5 @@
+// @flow
+
 import * as React from "react";
 
 class NotFound extends React.Component {

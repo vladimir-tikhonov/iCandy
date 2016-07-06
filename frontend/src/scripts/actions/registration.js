@@ -1,6 +1,14 @@
+// @flow
+
 import { REGISTRATION_REQUESTED, REGISTRATION_SUCCEEDED, REGISTRATION_FAILED } from "../actions/actions";
 
-export const registrationRequest = (params) => ({
+export type RegistrationRequestParams = {
+    username: string,
+    email: string,
+    password: string,
+}
+
+export const registrationRequest = (params: RegistrationRequestParams) => ({
     type: REGISTRATION_REQUESTED,
     params,
 });

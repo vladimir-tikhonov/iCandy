@@ -1,3 +1,5 @@
+// @flow
+
 import * as React from "react";
 import AppBar from "material-ui/AppBar";
 import CSSModules from "react-css-modules";

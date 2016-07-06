@@ -1,3 +1,5 @@
+// @flow
+
 import * as React from "react";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
@@ -9,6 +11,8 @@ import {connect} from "react-redux";
 import {registrationRequest} from "../actions/registration";
 import {getIsRegistrationInProgress} from "../reducers/registration";
 import {getRegistration} from "../reducers/reducer";
+
+import type { RegistrationRequestParams } from "../actions/registration";
 
 const styles = require("styles/pages/Register.scss");
 
@@ -22,8 +26,13 @@ const mapDispatchToProps = (dispatch) => ({
     },
 });
 
+@connect(mapStateToProps, mapDispatchToProps)
 @CSSModules(styles)
 class Register extends React.Component {
+    props: {
+        onSubmit: (params: RegistrationRequestParams) => void,
+    };
+
     onSubmit() : void {
         const params = {
             username: "123",
@@ -37,7 +46,7 @@ class Register extends React.Component {
         if (this.props.isLoading) {
             return (<CircularProgress size={0.5}/>);
         } else {
-            return (<RaisedButton primary label="Register" className={styles["submit-button"]} onClick={this.onSubmit.bind(this)}/>);
+            return (<RaisedButton primary label="Register" styleName="submit-button" onClick={this.onSubmit.bind(this)}/>);
         }
     }
 
@@ -57,4 +66,4 @@ class Register extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default Register;

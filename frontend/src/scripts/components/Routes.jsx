@@ -1,3 +1,5 @@
+// @flow
+
 import * as React from "react";
 import { Router, Route, IndexRoute, browserHistory } from "react-router";
 import { syncHistoryWithStore } from "react-router-redux";
@@ -18,7 +20,7 @@ const UserIsAuthenticated = UserAuthWrapper({
     failureRedirectPath: "sign-in",
 });
 
-const Routes = ({store}) => {
+const Routes = ({store}: any) => {
     return (
         <Router history={syncHistoryWithStore(browserHistory, store)}>
             <Route path="/" component={UserIsAuthenticated(AuthorizedWrapper)}>

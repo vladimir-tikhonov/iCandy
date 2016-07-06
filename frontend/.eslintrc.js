@@ -7,7 +7,8 @@ module.exports = {
     },
     "extends": ["eslint:recommended", "plugin:react/recommended"],
     "plugins": [
-        "react"
+        "react",
+        "flow-vars"
     ],
     "env": {
         "browser": true,
@@ -70,7 +71,7 @@ module.exports = {
         "no-dupe-class-members": 2,
         "no-dupe-keys": 2,
         "no-duplicate-case": 2,
-        "no-duplicate-imports": 2,
+        "no-duplicate-imports": 0,
         "no-empty-character-class": 2,
         "no-empty-pattern": 2,
         "no-eval": 2,
@@ -178,6 +179,9 @@ module.exports = {
         "yield-star-spacing": [2, "both"],
         "yoda": [2, "never"],
 
-        "react/prop-types": 0
+        "react/prop-types": 0,
+
+        "flow-vars/define-flow-type": 1,
+        "flow-vars/use-flow-type": 1
     }
 };
