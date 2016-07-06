@@ -8,8 +8,7 @@ function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-
-function* performRegistration(action) {
+function * performRegistration() {
     try {
         yield sleep(1000);
         yield put(registrationSuccess());
@@ -18,6 +17,6 @@ function* performRegistration(action) {
     }
 }
 
-export default function* saga() {
-    yield* takeEvery(REGISTRATION_REQUESTED, performRegistration);
+export default function * saga() {
+    yield * takeEvery(REGISTRATION_REQUESTED, performRegistration);
 }

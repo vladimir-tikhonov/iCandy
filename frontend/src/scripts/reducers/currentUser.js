@@ -1,5 +1,5 @@
-function currentUser(state = null, _action) {
-  return state;
+function currentUser(state = null) {
+    return state;
 }
 
 export default currentUser;

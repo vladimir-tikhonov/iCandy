@@ -5,7 +5,6 @@ export const registrationRequest = (params) => ({
     params,
 });
 
-
 export const registrationSuccess = () => ({
     type: REGISTRATION_SUCCEEDED,
 });
