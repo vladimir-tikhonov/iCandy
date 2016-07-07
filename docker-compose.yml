@@ -1,0 +1,17 @@
+version: '2'
+services:
+  frontend:
+    build: docker/frontend-dev
+    command: npm run start
+    ports:
+     - "3000:3000"
+    volumes:
+      - ./frontend:/opt/frontend
+      - frontend_deps:/opt/frontend/node_modules
+      - frontend_dist:/opt/frontend/dist
+
+volumes:
+  frontend_deps:
+    driver: local
+  frontend_dist:
+    driver: local
