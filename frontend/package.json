@@ -4,7 +4,7 @@
   "description": "Make NakedSelfie great again",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.config.js --inline",
+    "start": "webpack-dev-server --config webpack.config.js --inline --no-info",
     "build": "webpack",
     "eslint": "eslint 'src/**/*.js?(x)'",
     "sass-lint": "sass-lint -c sass-lint.yml 'src/styles/**/*.scss'  -v -q",
