@@ -52,23 +52,6 @@ defmodule Backend.Web do
     end
   end
 
-  def router do
-    quote do
-      use Phoenix.Router
-    end
-  end
-
-  def channel do
-    quote do
-      use Phoenix.Channel
-
-      alias Backend.Repo
-      import Ecto
-      import Ecto.Query
-      import Backend.Gettext
-    end
-  end
-
   @doc """
   When used, dispatch to the appropriate controller/view/etc.
   """

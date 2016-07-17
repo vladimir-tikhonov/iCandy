@@ -11,7 +11,6 @@ services:
       - ./frontend:/opt/frontend
       - frontend_deps:/opt/frontend/node_modules
       - frontend_dist:/opt/frontend/dist
-    tty: True
 
   backend:
     build: docker/backend-dev
@@ -24,7 +23,6 @@ services:
       - ./backend:/opt/backend
       - backend_deps:/opt/backend/deps
       - backend_build:/opt/backend/_build
-    tty: True
 
   postgres:
     image: postgres:9.6
