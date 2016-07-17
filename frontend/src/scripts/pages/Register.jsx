@@ -46,7 +46,12 @@ class Register extends React.Component {
         if (this.props.isLoading) {
             return (<CircularProgress size={0.5}/>);
         } else {
-            return (<RaisedButton primary label="Register" styleName="submit-button" onClick={this.onSubmit.bind(this)}/>);
+            return (
+                <RaisedButton
+                    primary label="Register"
+                    styleName="submit-button"
+                    onClick={this.onSubmit.bind(this)}/>
+            );
         }
     }
 

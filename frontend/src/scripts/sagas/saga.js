@@ -1,18 +1,15 @@
 // @flow
 
 import { takeEvery } from "redux-saga";
-import { put } from "redux-saga/effects";
+import { call, put } from "redux-saga/effects";
 
 import { REGISTRATION_REQUESTED } from "../actions/actions";
 import { registrationFailed, registrationSuccess } from "../actions/registration";
+import { registerUser } from "../api/users.js";
 
-function sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-function * performRegistration() {
+function * performRegistration({params}) {
     try {
-        yield sleep(1000);
+        yield call(registerUser, params);
         yield put(registrationSuccess());
     } catch (e) {
         yield put(registrationFailed());

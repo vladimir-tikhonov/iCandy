@@ -5,7 +5,9 @@ defmodule Backend.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", Backend do
+  scope "/api/v1" do
     pipe_through :api
+
+    resources("/users", Backend.UsersController, only: [:create])
   end
 end

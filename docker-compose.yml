@@ -5,8 +5,6 @@ services:
     command: npm run start
     ports:
      - "3000:3000"
-    links:
-      - backend
     volumes:
       - ./frontend:/opt/frontend
       - frontend_deps:/opt/frontend/node_modules
