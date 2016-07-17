@@ -19,12 +19,12 @@ defmodule Backend.Mixfile do
   def application do
     [mod: {Backend, []},
      applications: [:phoenix, :phoenix_pubsub, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :comeonin]]
   end
 
   # Specifies which paths to compile per environment.
-  defp elixirc_paths(:test), do: ["lib", "web", "test/support"]
-  defp elixirc_paths(_),     do: ["lib", "web"]
+  defp elixirc_paths(:test), do: ["lib", "web", "app", "test/support"]
+  defp elixirc_paths(_),     do: ["lib", "web", "app"]
 
   # Specifies your project dependencies.
   #
@@ -36,7 +36,8 @@ defmodule Backend.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
-     {:cors_plug, "~> 1.1"}]
+     {:cors_plug, "~> 1.1"},
+     {:comeonin, "~> 2.5"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

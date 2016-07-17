@@ -14,3 +14,6 @@ build-ci:
 	docker-compose run --rm frontend npm run eslint
 	docker-compose run --rm frontend npm run sass-lint
 	docker-compose run --rm backend mix test
+
+connect-db:
+	docker-compose run --rm postgres psql -h postgres -U postgres
