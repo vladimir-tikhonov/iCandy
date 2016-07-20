@@ -2,8 +2,9 @@
 
 import * as React from "react";
 import RaisedButton from "material-ui/RaisedButton";
-import TextField from "material-ui/TextField";
 import CircularProgress from "material-ui/CircularProgress";
+import Formsy from "formsy-react";
+import { FormsyText } from "formsy-material-ui/lib";
 import CSSModules from "react-css-modules";
 import {Link} from "react-router";
 import {connect} from "react-redux";
@@ -26,47 +27,141 @@ const mapDispatchToProps = (dispatch) => ({
     },
 });
 
+type RegisterPageProps = {
+    onSubmit: (params: RegistrationRequestParams) => void,
+};
+
+const VALIDATION_ERRORS = {
+    usernameField: {
+        minLength: "Minimum 2 characters",
+        maxLength: "Maximum 30 characters",
+    },
+    emailField: {
+        isEmail: "Please enter a valid email address",
+        minLength: "Minimum 5 characters",
+        maxLength: "Maximum 64 characters",
+    },
+    passwordField: {
+        minLength: "Minimum 6 characters",
+    },
+};
+
 @connect(mapStateToProps, mapDispatchToProps)
 @CSSModules(styles)
 class Register extends React.Component {
-    props: {
-        onSubmit: (params: RegistrationRequestParams) => void,
-    };
+    usernameInput: MaterialUIIntput
+    emailInput: MaterialUIIntput
+    passwordInput: MaterialUIIntput
+
+    props: RegisterPageProps
+
+    state: {
+        canSubmitForm: bool
+    }
+
+    onSubmit: () => void
+    onFormValid: () => void
+    onFormInvalid: () => void
+
+    constructor(props: RegisterPageProps) {
+        super(props);
+        this.state = {
+            canSubmitForm: false,
+        };
+
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onFormValid = this.onFormValid.bind(this);
+        this.onFormInvalid = this.onFormInvalid.bind(this);
+    }
+
+    onFormValid() : void {
+        this.setState({ canSubmitForm: true });
+    }
+
+    onFormInvalid() : void {
+        this.setState({ canSubmitForm: false });
+    }
 
     onSubmit() : void {
         const params = {
-            username: "123",
-            email: "123",
-            password: "123",
+            username: this.usernameInput.getValue(),
+            email: this.emailInput.getValue(),
+            password: this.passwordInput.getValue(),
         };
         this.props.onSubmit(params);
     }
 
-    renderSubmitButton() {
+    renderLoaderOrSubmitButton() {
         if (this.props.isLoading) {
             return (<CircularProgress size={0.5}/>);
         } else {
             return (
                 <RaisedButton
-                    primary label="Register"
-                    styleName="submit-button"
-                    onClick={this.onSubmit.bind(this)}/>
+                    primary
+                    type="submit"
+                    label="Register"
+                    disabled={!this.state.canSubmitForm}
+                    styleName="submit-button"/>
             );
         }
     }
 
     render() {
         return (
-            <div styleName="register-form-wrapper">
-                <TextField hintText="Username"/>
-                <TextField hintText="Email"/>
-                <TextField hintText="Password"/> {this.renderSubmitButton()}
+            <Formsy.Form
+                onValidSubmit={this.onSubmit}
+                onValid={this.onFormValid}
+                onInvalid={this.onFormInvalid}
+                styleName="register-form"
+            >
+
+                <FormsyText
+                    name="username"
+                    required
+                    validations={{
+                        minLength: 2,
+                        maxLength: 30,
+                    }}
+                    validationErrors={VALIDATION_ERRORS.usernameField}
+                    hintText="Username"
+                    ref={input => { this.usernameInput = input; } }
+                    styleName="form-field"
+                />
+
+                <FormsyText
+                    name="email"
+                    required
+                    validations={{
+                        isEmail: true,
+                        minLength: 5,
+                        maxLength: 64,
+                    }}
+                    validationErrors={VALIDATION_ERRORS.emailField}
+                    hintText="your@email.com"
+                    ref={input => { this.emailInput = input; } }
+                    styleName="form-field"
+                />
+
+                <FormsyText
+                    name="password"
+                    type="password"
+                    required
+                    validations={{
+                        minLength: 6,
+                    }}
+                    validationErrors={VALIDATION_ERRORS.passwordField}
+                    hintText="Password"
+                    ref={input => { this.passwordInput = input; } }
+                    styleName="form-field"
+                />
+
+                {this.renderLoaderOrSubmitButton()}
 
                 <div styleName="links">
                     <Link to="/sign-in" styleName="link">Already have an account?</Link>
                     <Link to="/sign-in" styleName="link">Forgot your password?</Link>
                 </div>
-            </div>
+            </Formsy.Form>
         );
     }
 }

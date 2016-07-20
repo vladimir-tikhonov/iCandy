@@ -7,3 +7,6 @@ esproposal.decorators=ignore
 
 module.name_mapper='.*\(.scss\)' -> 'empty/object'
 module.name_mapper='.*\(.css\)' -> 'empty/object'
+
+[libs]
+interfaces/

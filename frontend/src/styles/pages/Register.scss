@@ -1,5 +1,9 @@
-.register-form-wrapper {
+.register-form {
     composes: auth-form-wrapper from 'styles/base/pages/AuthPage.scss';
+}
+
+.form-field {
+    composes: form-field from 'styles/base/pages/AuthPage.scss';
 }
 
 .submit-button {
