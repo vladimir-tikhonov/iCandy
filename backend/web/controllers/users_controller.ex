@@ -1,7 +1,7 @@
 defmodule Backend.UsersController do
   use Backend.Web, :controller
 
-  alias Backend.Services.User.Persistence, as: UserPersistenceService
+  alias Backend.Services.Domain.User.Registration, as: UserRegistrationService
 
   def create(connection, params) do
     registration_params = %{
@@ -9,7 +9,7 @@ defmodule Backend.UsersController do
       email: params["email"],
       password: params["password"]
     }
-    UserPersistenceService.register_new_user(registration_params)
+    UserRegistrationService.register_new_user(registration_params)
     json(connection, %{})
   end
 end

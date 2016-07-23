@@ -1,6 +1,6 @@
-defmodule Backend.Services.User.Persistence do
+defmodule Backend.Services.Domain.User.Registration do
   alias Backend.Models.User, as: UserModel
-  alias Backend.Services.Hashing, as: HashingService
+  alias Backend.Services.Support.Hashing, as: HashingService
   alias Backend.Repo
 
   def register_new_user(params) do
