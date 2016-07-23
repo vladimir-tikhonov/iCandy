@@ -1,5 +1,9 @@
-.sign-in-form-wrapper {
-    composes: auth-form-wrapper from 'styles/base/pages/AuthPage.scss';
+.sign-in-form {
+    composes: auth-form from 'styles/base/pages/AuthPage.scss';
+}
+
+.form-field {
+    composes: form-field from 'styles/base/pages/AuthPage.scss';
 }
 
 .submit-button {
