@@ -1,5 +1,5 @@
 .register-form {
-    composes: auth-form-wrapper from 'styles/base/pages/AuthPage.scss';
+    composes: auth-form from 'styles/base/pages/AuthPage.scss';
 }
 
 .form-field {

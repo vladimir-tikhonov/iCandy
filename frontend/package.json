@@ -24,6 +24,7 @@
     "axios": "^0.13.1",
     "formsy-material-ui": "^0.4.3",
     "formsy-react": "^0.18.1",
+    "lodash": "^4.13.1",
     "material-ui": "^0.15.2",
     "react": "^15.2.1",
     "react-addons-shallow-compare": "^15.2.1",

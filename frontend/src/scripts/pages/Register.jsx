@@ -6,37 +6,16 @@ import CircularProgress from "material-ui/CircularProgress";
 import Formsy from "formsy-react";
 import { FormsyText } from "formsy-material-ui/lib";
 import CSSModules from "react-css-modules";
-import {Link} from "react-router";
-import {connect} from "react-redux";
+import { Link } from "react-router";
+import { connect } from "react-redux";
 
-import {registrationRequest} from "../actions/registration";
-import {getIsRegistrationInProgress, getRegistrationErrors} from "../reducers/registration";
-import {getRegistration} from "../reducers/reducer";
+import { registrationRequest } from "../actions/registration";
+import { getIsRegistrationInProgress, getRegistrationErrors } from "../reducers/registration";
+import { getRegistration } from "../reducers/reducer";
 
 import type { RegistrationRequestParams, RegistrationRequestErrors } from "../actions/registration";
 
 const styles = require("styles/pages/Register.scss");
-
-const mapStateToProps = (state) => {
-    const registrationState = getRegistration(state);
-
-    return {
-        isLoading: getIsRegistrationInProgress(registrationState),
-        registrationErrors: getRegistrationErrors(registrationState),
-    };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-    onSubmit: function(params) {
-        dispatch(registrationRequest(params));
-    },
-});
-
-type RegisterPageProps = {
-    onSubmit: (params: RegistrationRequestParams) => void,
-    isLoading: bool,
-    registrationErrors: RegistrationRequestErrors
-};
 
 const VALIDATION_ERRORS = {
     usernameField: {
@@ -53,6 +32,29 @@ const VALIDATION_ERRORS = {
     },
 };
 
+const mapStateToProps = (state) => {
+    const registrationState = getRegistration(state);
+
+    return {
+        isLoading: getIsRegistrationInProgress(registrationState),
+        registrationErrors: getRegistrationErrors(registrationState),
+    };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+    onSubmit: params => dispatch(registrationRequest(params)),
+});
+
+type RegisterPageProps = {
+    onSubmit: (params: RegistrationRequestParams) => void,
+    isLoading: bool,
+    registrationErrors: RegistrationRequestErrors
+};
+
+type RegisterPageState = {
+    canSubmitForm: bool
+};
+
 @connect(mapStateToProps, mapDispatchToProps)
 @CSSModules(styles)
 class Register extends React.Component {
@@ -60,14 +62,11 @@ class Register extends React.Component {
 
     props: RegisterPageProps
 
-    state: {
-        canSubmitForm: bool
-    }
+    state: RegisterPageState
 
     onSubmit: () => void
     onFormValid: () => void
     onFormInvalid: () => void
-    componentDidUpdate: any
 
     constructor(props: RegisterPageProps) {
         super(props);
@@ -78,14 +77,17 @@ class Register extends React.Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.onFormValid = this.onFormValid.bind(this);
         this.onFormInvalid = this.onFormInvalid.bind(this);
-        this.componentDidUpdate = this.componentDidUpdate.bind(this);
+    }
+
+    shouldComponentUpdate(nextProps: RegisterPageProps, nextState: RegisterPageState) {
+        return nextProps.isLoading !== this.props.isLoading ||
+            nextProps.registrationErrors !== this.props.registrationErrors ||
+            nextState.canSubmitForm !== this.state.canSubmitForm;
     }
 
     componentDidUpdate(previousProps: RegisterPageProps) {
-        if (this.props.registrationErrors !== previousProps.registrationErrors) {
-            const { username = null, email = null, password = null } = this.props.registrationErrors;
-            this.form.updateInputsWithError({username, email, password});
-        }
+        const { username = null, email = null } = this.props.registrationErrors;
+        this.form.updateInputsWithError({username, email});
     }
 
     onFormValid() : void {

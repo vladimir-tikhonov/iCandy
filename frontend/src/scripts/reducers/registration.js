@@ -38,12 +38,10 @@ export type RegistrationState = {
     registrationErrors: RegistrationErrorsState
 }
 
-const registration = combineReducers({
+export default combineReducers({
     isRegistrationInProgress,
     registrationErrors,
 });
-
-export default registration;
 
 export const getIsRegistrationInProgress = (state: RegistrationState) => state.isRegistrationInProgress;
 export const getRegistrationErrors = (state: RegistrationState) => state.registrationErrors;
