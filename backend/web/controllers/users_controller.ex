@@ -9,7 +9,10 @@ defmodule Backend.UsersController do
       email: params["email"],
       password: params["password"]
     }
-    UserRegistrationService.register_new_user(registration_params)
-    json(connection, %{})
+
+    case UserRegistrationService.register_new_user(registration_params) do
+      {:ok, _} -> json(connection, %{})
+      {:error, errors} -> connection |> put_status(400) |> json(%{errors: errors})
+    end
   end
 end

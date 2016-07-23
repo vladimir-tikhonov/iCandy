@@ -10,16 +10,21 @@ import {Link} from "react-router";
 import {connect} from "react-redux";
 
 import {registrationRequest} from "../actions/registration";
-import {getIsRegistrationInProgress} from "../reducers/registration";
+import {getIsRegistrationInProgress, getRegistrationErrors} from "../reducers/registration";
 import {getRegistration} from "../reducers/reducer";
 
-import type { RegistrationRequestParams } from "../actions/registration";
+import type { RegistrationRequestParams, RegistrationRequestErrors } from "../actions/registration";
 
 const styles = require("styles/pages/Register.scss");
 
-const mapStateToProps = (state) => ({
-    isLoading: getIsRegistrationInProgress(getRegistration(state)),
-});
+const mapStateToProps = (state) => {
+    const registrationState = getRegistration(state);
+
+    return {
+        isLoading: getIsRegistrationInProgress(registrationState),
+        registrationErrors: getRegistrationErrors(registrationState),
+    };
+};
 
 const mapDispatchToProps = (dispatch) => ({
     onSubmit: function(params) {
@@ -29,6 +34,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 type RegisterPageProps = {
     onSubmit: (params: RegistrationRequestParams) => void,
+    isLoading: bool,
+    registrationErrors: RegistrationRequestErrors
 };
 
 const VALIDATION_ERRORS = {
@@ -49,9 +56,7 @@ const VALIDATION_ERRORS = {
 @connect(mapStateToProps, mapDispatchToProps)
 @CSSModules(styles)
 class Register extends React.Component {
-    usernameInput: MaterialUIIntput
-    emailInput: MaterialUIIntput
-    passwordInput: MaterialUIIntput
+    form: MaterialUIForm
 
     props: RegisterPageProps
 
@@ -62,6 +67,7 @@ class Register extends React.Component {
     onSubmit: () => void
     onFormValid: () => void
     onFormInvalid: () => void
+    componentDidUpdate: any
 
     constructor(props: RegisterPageProps) {
         super(props);
@@ -72,6 +78,14 @@ class Register extends React.Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.onFormValid = this.onFormValid.bind(this);
         this.onFormInvalid = this.onFormInvalid.bind(this);
+        this.componentDidUpdate = this.componentDidUpdate.bind(this);
+    }
+
+    componentDidUpdate(previousProps: RegisterPageProps) {
+        if (this.props.registrationErrors !== previousProps.registrationErrors) {
+            const { username = null, email = null, password = null } = this.props.registrationErrors;
+            this.form.updateInputsWithError({username, email, password});
+        }
     }
 
     onFormValid() : void {
@@ -82,11 +96,11 @@ class Register extends React.Component {
         this.setState({ canSubmitForm: false });
     }
 
-    onSubmit() : void {
+    onSubmit(data: RegistrationRequestParams) : void {
         const params = {
-            username: this.usernameInput.getValue(),
-            email: this.emailInput.getValue(),
-            password: this.passwordInput.getValue(),
+            username: data.username,
+            email: data.email,
+            password: data.password,
         };
         this.props.onSubmit(params);
     }
@@ -94,16 +108,16 @@ class Register extends React.Component {
     renderLoaderOrSubmitButton() {
         if (this.props.isLoading) {
             return (<CircularProgress size={0.5}/>);
-        } else {
-            return (
-                <RaisedButton
-                    primary
-                    type="submit"
-                    label="Register"
-                    disabled={!this.state.canSubmitForm}
-                    styleName="submit-button"/>
-            );
         }
+
+        return (
+            <RaisedButton
+                primary
+                type="submit"
+                label="Register"
+                disabled={!this.state.canSubmitForm}
+                styleName="submit-button"/>
+        );
     }
 
     render() {
@@ -113,6 +127,7 @@ class Register extends React.Component {
                 onValid={this.onFormValid}
                 onInvalid={this.onFormInvalid}
                 styleName="register-form"
+                ref={form => { this.form = form; } }
             >
 
                 <FormsyText
@@ -124,7 +139,6 @@ class Register extends React.Component {
                     }}
                     validationErrors={VALIDATION_ERRORS.usernameField}
                     hintText="Username"
-                    ref={input => { this.usernameInput = input; } }
                     styleName="form-field"
                 />
 
@@ -138,7 +152,6 @@ class Register extends React.Component {
                     }}
                     validationErrors={VALIDATION_ERRORS.emailField}
                     hintText="your@email.com"
-                    ref={input => { this.emailInput = input; } }
                     styleName="form-field"
                 />
 
@@ -151,7 +164,6 @@ class Register extends React.Component {
                     }}
                     validationErrors={VALIDATION_ERRORS.passwordField}
                     hintText="Password"
-                    ref={input => { this.passwordInput = input; } }
                     styleName="form-field"
                 />
 

@@ -15,14 +15,35 @@ function isRegistrationInProgress(state: bool = false, action) {
     }
 }
 
+export type RegistrationErrorsState = {
+    username?: string,
+    email?: string,
+    password?: string,
+}
+
+function registrationErrors(state: RegistrationErrorsState = {}, action) {
+    switch (action.type) {
+    case REGISTRATION_REQUESTED:
+    case REGISTRATION_SUCCEEDED:
+        return {};
+    case REGISTRATION_FAILED:
+        return {...action.errors};
+    default:
+        return state;
+    }
+}
+
 export type RegistrationState = {
-    isRegistrationInProgress: bool
+    isRegistrationInProgress: bool,
+    registrationErrors: RegistrationErrorsState
 }
 
 const registration = combineReducers({
     isRegistrationInProgress,
+    registrationErrors,
 });
 
 export default registration;
 
 export const getIsRegistrationInProgress = (state: RegistrationState) => state.isRegistrationInProgress;
+export const getRegistrationErrors = (state: RegistrationState) => state.registrationErrors;

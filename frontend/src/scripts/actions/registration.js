@@ -8,6 +8,12 @@ export type RegistrationRequestParams = {
     password: string,
 }
 
+export type RegistrationRequestErrors = {
+    username: string,
+    email: string,
+    password: string,
+}
+
 export const registrationRequest = (params: RegistrationRequestParams) => ({
     type: REGISTRATION_REQUESTED,
     params,
@@ -17,6 +23,7 @@ export const registrationSuccess = () => ({
     type: REGISTRATION_SUCCEEDED,
 });
 
-export const registrationFailed = () => ({
+export const registrationFailed = (errors: RegistrationRequestErrors) => ({
     type: REGISTRATION_FAILED,
+    errors,
 });

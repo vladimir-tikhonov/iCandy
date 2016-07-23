@@ -12,7 +12,7 @@ function * performRegistration({params}) {
         yield call(registerUser, params);
         yield put(registrationSuccess());
     } catch (e) {
-        yield put(registrationFailed());
+        yield put(registrationFailed(e.response.data.errors));
     }
 }
 
