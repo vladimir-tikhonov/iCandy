@@ -29,3 +29,6 @@ config :backend, Backend.Repo,
   database: "backend_dev",
   hostname: "postgres",
   pool_size: 10
+
+config :backend, Backend.Services.Domain.User.Authentication,
+  secret_key: "n9RcIebq1yAOHZK5toSjfKu5ktfz2XKnhupg3sbFAiqoRzHL38khPj27X7FvRevz"
