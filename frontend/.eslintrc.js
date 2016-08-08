@@ -182,7 +182,6 @@ module.exports = {
         "react/prop-types": 0,
 
         "flowtype/define-flow-type": 1,
-        "flowtype/use-flow-type": 1,
-        "flowtype/require-valid-file-annotation": [2, "always"]
+        "flowtype/use-flow-type": 1
     }
 };

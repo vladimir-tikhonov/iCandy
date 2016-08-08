@@ -13,5 +13,5 @@ export const signInUser = (params: SignInRequestParams) => {
         password: params.password,
     };
 
-    post("/sessions", apiParams);
+    return post("/sessions", apiParams);
 };
