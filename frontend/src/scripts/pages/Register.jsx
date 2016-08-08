@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import RaisedButton from "material-ui/RaisedButton";
-import CircularProgress from "material-ui/CircularProgress";
 import Formsy from "formsy-react";
 import { FormsyText } from "formsy-material-ui/lib";
 import CSSModules from "react-css-modules";
@@ -107,21 +106,6 @@ class Register extends React.Component {
         this.props.onSubmit(params);
     }
 
-    renderLoaderOrSubmitButton() {
-        if (this.props.isLoading) {
-            return (<CircularProgress size={0.5}/>);
-        }
-
-        return (
-            <RaisedButton
-                primary
-                type="submit"
-                label="Register"
-                disabled={!this.state.canSubmitForm}
-                styleName="submit-button"/>
-        );
-    }
-
     render() {
         return (
             <Formsy.Form
@@ -169,7 +153,12 @@ class Register extends React.Component {
                     styleName="form-field"
                 />
 
-                {this.renderLoaderOrSubmitButton()}
+                <RaisedButton
+                    primary
+                    type="submit"
+                    label="Register"
+                    disabled={!this.state.canSubmitForm || this.props.isLoading}
+                    styleName="submit-button"/>
 
                 <div styleName="links">
                     <Link to="/sign-in" styleName="link">Already have an account?</Link>

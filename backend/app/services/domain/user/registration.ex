@@ -4,14 +4,14 @@ defmodule Backend.Services.Domain.User.Registration do
   alias Backend.Repo
   alias Backend.Services.Support.ErrorsFormatter
 
-  def register_new_user(params) do
-    params = %{
-      username: params.username,
-      email: params.email,
-      password_hash: HashingService.hash_string(params.password)
+  def register_new_user(%{username: username, email: email, password: password}) do
+    user_details = %{
+      username: username,
+      email: email,
+      password_hash: HashingService.hash_string(password)
     }
 
-    changeset = UserModel.changeset(%UserModel{}, params)
+    changeset = UserModel.changeset(%UserModel{}, user_details)
     case Repo.insert(changeset) do
       {:ok, changes} -> {:ok, changes}
       {:error, changeset} -> {:error, ErrorsFormatter.format_changeset_errors(changeset.errors)}

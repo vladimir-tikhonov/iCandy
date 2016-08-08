@@ -9,6 +9,7 @@ export type SignInRequestParams = {
 
 export type SignInRequestErrors = {
     usernameOrEmail: string,
+    password: string,
 }
 
 export const signInRequest = (params: SignInRequestParams) => ({

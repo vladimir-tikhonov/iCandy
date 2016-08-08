@@ -30,14 +30,18 @@ defmodule Backend.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.2.0"},
-     {:phoenix_pubsub, "~> 1.0"},
-     {:phoenix_ecto, "~> 3.0"},
-     {:postgrex, ">= 0.0.0"},
-     {:gettext, "~> 0.11"},
-     {:cowboy, "~> 1.0"},
-     {:cors_plug, "~> 1.1"},
-     {:comeonin, "~> 2.5"}]
+    [
+      {:phoenix, "~> 1.2.0"},
+      {:phoenix_ecto, "~> 3.0.0"},
+      {:postgrex, "~> 0.11.2"},
+      {:gettext, "~> 0.11.0"},
+      {:cowboy, "~> 1.0.4"},
+      {:cors_plug, "~> 1.1.1"},
+      {:comeonin, "~> 2.5.2"},
+      {:joken, "~> 1.2.1"},
+      {:uuid, "~> 1.1.4"},
+      {:timex, "~> 3.0.5"}
+   ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

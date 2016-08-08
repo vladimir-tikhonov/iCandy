@@ -9,5 +9,6 @@ defmodule Backend.Router do
     pipe_through :api
 
     resources("/users", Backend.UsersController, only: [:create])
+    resources("/sessions", Backend.SessionsController, only: [:create])
   end
 end

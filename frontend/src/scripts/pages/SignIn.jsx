@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import RaisedButton from "material-ui/RaisedButton";
-import CircularProgress from "material-ui/CircularProgress";
 import Formsy from "formsy-react";
 import { FormsyText } from "formsy-material-ui/lib";
 import CSSModules from "react-css-modules";
@@ -81,8 +80,8 @@ class SignIn extends React.Component {
     }
 
     componentDidUpdate(previousProps: SignInPageProps) {
-        const { usernameOrEmail = null } = this.props.signInErrors;
-        this.form.updateInputsWithError({usernameOrEmail});
+        const { usernameOrEmail = null, password = null } = this.props.signInErrors;
+        this.form.updateInputsWithError({usernameOrEmail, password});
     }
 
     onFormValid() : void {
@@ -99,21 +98,6 @@ class SignIn extends React.Component {
             password: data.password,
         };
         this.props.onSubmit(params);
-    }
-
-    renderLoaderOrSubmitButton() {
-        if (this.props.isLoading) {
-            return (<CircularProgress size={0.5}/>);
-        }
-
-        return (
-            <RaisedButton
-                primary
-                type="submit"
-                label="Sign In"
-                disabled={!this.state.canSubmitForm}
-                styleName="submit-button"/>
-        );
     }
 
     render() {
@@ -150,7 +134,12 @@ class SignIn extends React.Component {
                     styleName="form-field"
                 />
 
-                {this.renderLoaderOrSubmitButton()}
+                <RaisedButton
+                    primary
+                    type="submit"
+                    label="Sign In"
+                    disabled={!this.state.canSubmitForm || this.props.isLoading}
+                    styleName="submit-button"/>
 
                 <div styleName="links">
                     <Link to="/register" styleName="link">Don't have an account?</Link>
