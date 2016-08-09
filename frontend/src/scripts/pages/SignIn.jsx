@@ -3,7 +3,7 @@
 import * as React from "react";
 import RaisedButton from "material-ui/RaisedButton";
 import Formsy from "formsy-react";
-import { FormsyText } from "formsy-material-ui/lib";
+import TextField from "../components/inputs/TextField";
 import CSSModules from "react-css-modules";
 import { Link } from "react-router";
 import { connect } from "react-redux";
@@ -45,10 +45,6 @@ type SignInPageProps = {
     signInErrors: SignInRequestErrors
 };
 
-type SignInPageState = {
-    canSubmitForm: bool
-};
-
 @connect(mapStateToProps, mapDispatchToProps)
 @CSSModules(styles)
 class SignIn extends React.Component {
@@ -56,40 +52,22 @@ class SignIn extends React.Component {
 
     props: SignInPageProps
 
-    state: SignInPageState
-
     onSubmit: () => void
-    onFormValid: () => void
-    onFormInvalid: () => void
 
     constructor(props: SignInPageProps) {
         super(props);
-        this.state = {
-            canSubmitForm: false,
-        };
 
         this.onSubmit = this.onSubmit.bind(this);
-        this.onFormValid = this.onFormValid.bind(this);
-        this.onFormInvalid = this.onFormInvalid.bind(this);
     }
 
-    shouldComponentUpdate(nextProps: SignInPageProps, nextState: SignInPageState) {
+    shouldComponentUpdate(nextProps: SignInPageProps) {
         return nextProps.isLoading !== this.props.isLoading ||
-            nextProps.signInErrors !== this.props.signInErrors ||
-            nextState.canSubmitForm !== this.state.canSubmitForm;
+            nextProps.signInErrors !== this.props.signInErrors;
     }
 
     componentDidUpdate(previousProps: SignInPageProps) {
         const { usernameOrEmail = null, password = null } = this.props.signInErrors;
         this.form.updateInputsWithError({usernameOrEmail, password});
-    }
-
-    onFormValid() : void {
-        this.setState({ canSubmitForm: true });
-    }
-
-    onFormInvalid() : void {
-        this.setState({ canSubmitForm: false });
     }
 
     onSubmit(data: SignInRequestParams) : void {
@@ -104,13 +82,11 @@ class SignIn extends React.Component {
         return (
             <Formsy.Form
                 onValidSubmit={this.onSubmit}
-                onValid={this.onFormValid}
-                onInvalid={this.onFormInvalid}
                 styleName="sign-in-form"
                 ref={form => { this.form = form; } }
             >
 
-                <FormsyText
+                <TextField
                     name="usernameOrEmail"
                     required
                     validations={{
@@ -122,9 +98,10 @@ class SignIn extends React.Component {
                     styleName="form-field"
                 />
 
-                <FormsyText
+                <TextField
                     name="password"
                     type="password"
+                    autoComplete={false}
                     required
                     validations={{
                         minLength: 6,
@@ -138,7 +115,7 @@ class SignIn extends React.Component {
                     primary
                     type="submit"
                     label="Sign In"
-                    disabled={!this.state.canSubmitForm || this.props.isLoading}
+                    disabled={this.props.isLoading}
                     styleName="submit-button"/>
 
                 <div styleName="links">

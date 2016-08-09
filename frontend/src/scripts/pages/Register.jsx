@@ -3,7 +3,7 @@
 import * as React from "react";
 import RaisedButton from "material-ui/RaisedButton";
 import Formsy from "formsy-react";
-import { FormsyText } from "formsy-material-ui/lib";
+import TextField from "../components/inputs/TextField";
 import CSSModules from "react-css-modules";
 import { Link } from "react-router";
 import { connect } from "react-redux";
@@ -50,10 +50,6 @@ type RegisterPageProps = {
     registrationErrors: RegistrationRequestErrors
 };
 
-type RegisterPageState = {
-    canSubmitForm: bool
-};
-
 @connect(mapStateToProps, mapDispatchToProps)
 @CSSModules(styles)
 class Register extends React.Component {
@@ -61,40 +57,22 @@ class Register extends React.Component {
 
     props: RegisterPageProps
 
-    state: RegisterPageState
-
     onSubmit: () => void
-    onFormValid: () => void
-    onFormInvalid: () => void
 
     constructor(props: RegisterPageProps) {
         super(props);
-        this.state = {
-            canSubmitForm: false,
-        };
 
         this.onSubmit = this.onSubmit.bind(this);
-        this.onFormValid = this.onFormValid.bind(this);
-        this.onFormInvalid = this.onFormInvalid.bind(this);
     }
 
-    shouldComponentUpdate(nextProps: RegisterPageProps, nextState: RegisterPageState) {
+    shouldComponentUpdate(nextProps: RegisterPageProps) {
         return nextProps.isLoading !== this.props.isLoading ||
-            nextProps.registrationErrors !== this.props.registrationErrors ||
-            nextState.canSubmitForm !== this.state.canSubmitForm;
+            nextProps.registrationErrors !== this.props.registrationErrors;
     }
 
     componentDidUpdate(previousProps: RegisterPageProps) {
         const { username = null, email = null } = this.props.registrationErrors;
         this.form.updateInputsWithError({username, email});
-    }
-
-    onFormValid() : void {
-        this.setState({ canSubmitForm: true });
-    }
-
-    onFormInvalid() : void {
-        this.setState({ canSubmitForm: false });
     }
 
     onSubmit(data: RegistrationRequestParams) : void {
@@ -110,13 +88,11 @@ class Register extends React.Component {
         return (
             <Formsy.Form
                 onValidSubmit={this.onSubmit}
-                onValid={this.onFormValid}
-                onInvalid={this.onFormInvalid}
                 styleName="register-form"
                 ref={form => { this.form = form; } }
             >
 
-                <FormsyText
+                <TextField
                     name="username"
                     required
                     validations={{
@@ -128,7 +104,7 @@ class Register extends React.Component {
                     styleName="form-field"
                 />
 
-                <FormsyText
+                <TextField
                     name="email"
                     required
                     validations={{
@@ -141,7 +117,7 @@ class Register extends React.Component {
                     styleName="form-field"
                 />
 
-                <FormsyText
+                <TextField
                     name="password"
                     type="password"
                     required
@@ -157,7 +133,7 @@ class Register extends React.Component {
                     primary
                     type="submit"
                     label="Register"
-                    disabled={!this.state.canSubmitForm || this.props.isLoading}
+                    disabled={this.props.isLoading}
                     styleName="submit-button"/>
 
                 <div styleName="links">
